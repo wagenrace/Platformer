@@ -81,7 +81,6 @@ func decode_level(level_base64: String):
 	
 	for letter in level_base64:
 		var _number = base64_lookup[letter]
-		print(letter, _number)
 		var _gap_size = _number % 3 + 1
 		var _height = int(_number/3) % 5 - 2
 		var _island_width = int(_number/15) % 4 + 1
