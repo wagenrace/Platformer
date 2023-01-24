@@ -69,9 +69,11 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -10 )
+z_index = 5
 texture = ExtResource( 1 )
 hframes = 7
 

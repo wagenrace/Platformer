@@ -1,5 +1,6 @@
 extends TileMap
 
+# This is not a clean way of doing it, but it works
 var base64_lookup = {
 	"A": 0,
 	"B": 1,
@@ -68,13 +69,35 @@ var base64_lookup = {
 }
 
 onready var tileMap = $"."
+onready var redDoor = $"DoorRed"
+onready var blueDoor = $"DoorBlue"
+onready var greenDoor = $"DoorGreen"
 
-func decode_level(level_base64: String):
-	var current_position = Vector2(0, 11)
-	var level = [ Vector2(-2, 11), Vector2(-1, 11), Vector2(0, 11),]
+
+func apply_level(level):
+	for cell in tileMap.get_used_cells():
+		tileMap.set_cellv(cell, -1)
+		
+	# Staring platform
+	tileMap.set_cell(-2, 11, 0)
+	tileMap.set_cell(-1, 11, 0)
+	tileMap.set_cell(0, 11, 0)
 	
-	for letter in level_base64:
+	var current_position = Vector2(0, 11)
+	
+	for letter in level:
 		var _number = base64_lookup[letter]
+		if _number == 60:
+			var door_position = current_position
+			door_position.x += 1
+			door_position = tileMap.map_to_world(door_position)
+
+			for _i in range(2):
+				current_position.x += 1
+				tileMap.set_cellv(current_position, 0)
+			redDoor.position = door_position
+			continue
+			
 		var _gap_size = _number % 3 + 1
 		var _height = int(_number/3) % 5 - 2
 		var _island_width = int(_number/15) % 4 + 1
@@ -85,12 +108,5 @@ func decode_level(level_base64: String):
 
 		for _i in range(_island_width):
 			current_position.x += 1
-			level.append(current_position)
-	return level
+			tileMap.set_cellv(current_position, 0)
 
-func apply_level(level):
-	for cell in tileMap.get_used_cells():
-		tileMap.set_cellv(cell, -1)
-	
-	for cell in level:
-		tileMap.set_cell(cell[0], cell[1], 0)
