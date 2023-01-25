@@ -33,7 +33,10 @@ func _physics_process(delta):
 		if Input.get_action_strength("ui_up"):
 			motion.y =  -JUMP_FORCE
 	else:
-		animationPlayer.play("Jump")
+		if motion.y > 0:
+			animationPlayer.play("Jump")
+		else:
+			animationPlayer.play("Fall")
 		if Input.is_action_just_released("ui_up") and motion.y < -JUMP_FORCE/2:
 			motion.y = -JUMP_FORCE/2
 		

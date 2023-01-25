@@ -72,7 +72,18 @@ onready var tileMap = $"."
 onready var redDoor = $"DoorRed"
 onready var blueDoor = $"DoorBlue"
 onready var greenDoor = $"DoorGreen"
+var door_island_size: int = 2
 
+func add_door(_door, current_position):
+	var door_position = current_position
+	door_position.x += 1
+	door_position = tileMap.map_to_world(door_position)
+
+	for _i in range(door_island_size):
+		current_position.x += 1
+		tileMap.set_cellv(current_position, 0)
+	
+	_door.position = door_position
 
 func apply_level(level):
 	for cell in tileMap.get_used_cells():
@@ -88,17 +99,19 @@ func apply_level(level):
 	for letter in level:
 		var _number = base64_lookup[letter]
 		if _number == 60:
-			var door_position = current_position
-			door_position.x += 1
-			door_position = tileMap.map_to_world(door_position)
-
-			for _i in range(2):
-				current_position.x += 1
-				tileMap.set_cellv(current_position, 0)
-			redDoor.position = door_position
+			add_door(redDoor, current_position)
+			current_position.x += door_island_size
+			continue
+		if _number == 61:
+			add_door(greenDoor, current_position)
+			current_position.x += door_island_size
+			continue
+		if _number == 62:
+			add_door(blueDoor, current_position)
+			current_position.x += door_island_size
 			continue
 			
-		var _gap_size = _number % 3 + 1
+		var _gap_size = _number % 3 + 2
 		var _height = int(_number/3) % 5 - 2
 		var _island_width = int(_number/15) % 4 + 1
 

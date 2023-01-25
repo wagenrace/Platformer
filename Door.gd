@@ -1,15 +1,14 @@
 
 extends Area2D
 
-export(Texture) var spriteDoor setget my_func
+export(Texture) var spriteDoor setget assing_sprite
 export(String) var nextLevel = ""
 # export(NodePath) var tileMap
 
 # onready var tileMap = get_node("parent")
 
-func my_func(tex):
-	var asset = tex
-	get_node("Sprite").texture = asset
+func assing_sprite(tex):
+	get_node("Sprite").texture = tex
 
 func _ready():
 	pass

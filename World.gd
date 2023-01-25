@@ -5,7 +5,7 @@ onready var camera = $Camera2D
 onready var tileMap = $TileMap
 
 func _ready():
-	tileMap.apply_level("AAAA8")
+	tileMap.apply_level("8A9a+")
 
 func _physics_process(_delta):
 	var camera_pos = camera.get_position()
@@ -22,7 +22,7 @@ func _input(ev):
 		print(tileMap.redDoor.position)
 		
 	if ev is InputEventKey and ev.scancode == KEY_1:
-		tileMap.apply_level("abcdefAA8")
+		tileMap.apply_level("9a0553bcd+efAA8")
 	
 	if ev is InputEventKey and ev.scancode == KEY_2:
-		tileMap.apply_level("aaaa8")
+		tileMap.apply_level("8A9AAAA+")
