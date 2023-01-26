@@ -84,17 +84,13 @@ func add_door(_door, current_position):
 		tileMap.set_cellv(current_position, 0)
 	
 	_door.position = door_position
-
+	
+		
 func apply_level(level):
 	for cell in tileMap.get_used_cells():
 		tileMap.set_cellv(cell, -1)
-		
-	# Staring platform
-	tileMap.set_cell(-2, 11, 0)
-	tileMap.set_cell(-1, 11, 0)
-	tileMap.set_cell(0, 11, 0)
 	
-	var current_position = Vector2(0, 11)
+	var current_position = Vector2(-2, 6)
 	
 	for letter in level:
 		var _number = base64_lookup[letter]
@@ -111,7 +107,7 @@ func apply_level(level):
 			current_position.x += door_island_size
 			continue
 			
-		var _gap_size = _number % 3 + 2
+		var _gap_size = _number % 3 + 1
 		var _height = int(_number/3) % 5 - 2
 		var _island_width = int(_number/15) % 4 + 1
 
