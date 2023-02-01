@@ -8,7 +8,7 @@ onready var httpActive = false
 
 func _ready():
 	$HTTPRequest.connect("request_completed", self, "_on_request_completed")
-	init_level()
+	_update_level(1)
 
 func fetch_new_levels(_new_level_number):
 	httpActive = true
@@ -33,38 +33,19 @@ func _physics_process(_delta):
 	camera_pos.x = player.position.x
 	camera.set_position(camera_pos)
 
-func init_level():
-	var door_name = tileMap.redDoor.name
-	_update_level(1, door_name)
-	player.last_door_name = door_name
-	print(door_name, doorMapping)
-	# var encoded_level = doorMapping[door_name]["level_encoded"]
-	# tileMap.apply_level(encoded_level)
-
-func enter_door(door_name: String):
-	player.last_door_name = door_name
+func enter_door(door):
+	player.last_door = door
+	var door_name = door.name
 	var encoded_level = doorMapping[door_name]["level_encoded"]
 	var new_level_number = doorMapping[door_name]["level_num"]
 	tileMap.apply_level(encoded_level)
-	_update_level(new_level_number, door_name)
+	_update_level(new_level_number)
 
-func _update_level(new_level_number: int, door_name: String):
+func _update_level(new_level_number: int):
 	var new_level = fetch_new_levels(new_level_number)
-	
-	var door
-	if door_name == tileMap.redDoor.name:
-		door = tileMap.redDoor
-	elif door_name == tileMap.greenDoor.name:
-		door = tileMap.greenDoor
-	elif door_name == tileMap.blueDoor.name:
-		door = tileMap.blueDoor
-	
-	var new_position = door.position
-	new_position.x += door.get_node("Sprite").texture.get_width() / 2
-	player.position = new_position
+	player.reset_position()
 	
 func _input(ev):
-		
 	if ev is InputEventKey and ev.scancode == KEY_1:
 		tileMap.apply_level("9CCa0553bcd+efAA8")
 	

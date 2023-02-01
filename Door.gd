@@ -14,6 +14,6 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		if(get_overlapping_bodies().size()):
-			world.enter_door(name)
+			world.enter_door(self)
 
 			

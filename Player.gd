@@ -7,7 +7,7 @@ const AIR_RESISTANCE = 0.02
 const MAX_SPEED = 64
 const JUMP_FORCE = 180
 
-var last_door_name = ""
+var last_door = null
 
 var motion = Vector2.ZERO
 
@@ -52,7 +52,13 @@ func _physics_process(delta):
 	
 func reset_position():
 	is_alive = true
-	position = Vector2(0, 0)
+	if last_door:
+		var new_position = last_door.position
+		new_position.x += last_door.get_node("Sprite").texture.get_width() / 2
+		new_position.y -= 10
+		position = new_position
+	else:
+		position = Vector2.ZERO
 
 func _input(ev):
 	if ev is InputEventKey and ev.scancode == KEY_R:
