@@ -7,12 +7,18 @@ const AIR_RESISTANCE = 0.02
 const MAX_SPEED = 64
 const JUMP_FORCE = 180
 
+var last_door_name = ""
+
 var motion = Vector2.ZERO
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
+onready var is_alive = true
 
 func _physics_process(delta):
+	if !is_alive:
+		return
+	
 	var input_x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	
 	if input_x != 0:
@@ -43,3 +49,12 @@ func _physics_process(delta):
 		if input_x == 0:
 			motion.x = lerp(motion.x, 0, AIR_RESISTANCE)
 	motion = move_and_slide(motion, Vector2.UP)
+	
+func reset_position():
+	is_alive = true
+	position = Vector2(0, 0)
+
+func _input(ev):
+	if ev is InputEventKey and ev.scancode == KEY_R:
+		is_alive = false
+		animationPlayer.play("Explosion")

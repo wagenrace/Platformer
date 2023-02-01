@@ -74,6 +74,7 @@ onready var blueDoor = $"DoorBlue"
 onready var greenDoor = $"DoorGreen"
 var door_island_size: int = 2
 
+	
 func add_door(_door, current_position):
 	var door_position = current_position
 	door_position.x += 1
