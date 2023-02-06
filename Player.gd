@@ -52,6 +52,7 @@ func _physics_process(delta):
 	
 func reset_position():
 	is_alive = true
+	motion = Vector2.ZERO
 	if last_door:
 		var new_position = last_door.position
 		new_position.x += last_door.get_node("Sprite").texture.get_width() / 2
