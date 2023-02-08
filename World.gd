@@ -5,6 +5,8 @@ onready var camera = $Camera2D
 onready var tileMap = $TileMap
 onready var doorMapping = {}
 onready var httpActive = false
+var url = "https://platformer.deta.dev/get_level_by_number"
+# var url = "http://127.0.0.1:8000/get_level_by_number"
 
 func _ready():
 	$HTTPRequest.connect("request_completed", self, "_on_request_completed")
@@ -14,9 +16,9 @@ func fetch_new_levels(_new_level_number):
 	httpActive = true
 	var fields = {"id": _new_level_number}
 	var query_string = to_json(fields)
-	var headers = ["Content-Type: application/x-www-form-urlencoded", "Content-Length: " + str(query_string.length())]
-	var result = $HTTPRequest.request("https://platformer.deta.dev/get_level_by_number", 
-		PoolStringArray( ),
+	var headers = ["Content-Type: application/json", "content-length: " + str(query_string.length())]
+	var result = $HTTPRequest.request(url, 
+		PoolStringArray(headers),
 		true, 
 		HTTPClient.METHOD_POST, 
 		query_string)
@@ -26,7 +28,6 @@ func _on_request_completed(result, response_code, headers, body):
 	var body_content = body.get_string_from_utf8()
 	print(body_content)
 	var json = JSON.parse(body_content)
-	print(json.result)
 	doorMapping = json.result
 	httpActive = false
 
