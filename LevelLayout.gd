@@ -119,4 +119,3 @@ func apply_level(level):
 		for _i in range(_island_width):
 			current_position.x += 1
 			tileMap.set_cellv(current_position, 0)
-
