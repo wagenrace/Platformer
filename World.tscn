@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tileset.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://art/door_green.png" type="Texture" id=7]
 [ext_resource path="res://LevelLayout.gd" type="Script" id=8]
 [ext_resource path="res://art/door_red.png" type="Texture" id=9]
+[ext_resource path="res://art/background_city.png" type="Texture" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -510,3 +511,9 @@ margin_right = 149.0
 margin_bottom = 14.0
 custom_fonts/font = SubResource( 50 )
 text = "Intro lot of other text that is also here for no good reason "
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground"]
+position = Vector2( 161, 89 )
+texture = ExtResource( 10 )
