@@ -24,7 +24,9 @@ func fetch_new_levels(_new_level_number):
 	
 
 func update_doors():
-	tileMap.redDoor.level_name = doorMapping["DoorRed"]["name"]
+	tileMap.redDoor.level_name = doorMapping[tileMap.redDoor.name]["name"]
+	tileMap.greenDoor.level_name = doorMapping[tileMap.greenDoor.name]["name"]
+	tileMap.blueDoor.level_name = doorMapping[tileMap.blueDoor.name]["name"]
 	
 func _on_request_completed(result, response_code, headers, body):
 	var body_content = body.get_string_from_utf8()
