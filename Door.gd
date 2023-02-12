@@ -2,12 +2,16 @@
 extends Area2D
 
 export(Texture) var spriteDoor setget assing_sprite
+export(String) var level_name setget assing_door_label
 
 onready var world = get_tree().get_root().get_node("World")
 
 func assing_sprite(tex):
 	get_node("Sprite").texture = tex
 
+func assing_door_label(tex: String):
+	get_node("Label").text = tex
+	
 func _ready():
 	pass
 

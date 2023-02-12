@@ -13,7 +13,6 @@ func _ready():
 	_update_level(1)
 
 func fetch_new_levels(_new_level_number):
-	httpActive = true
 	var fields = {"id": _new_level_number}
 	var query_string = to_json(fields)
 	var headers = ["Content-Type: application/json", "content-length: " + str(query_string.length())]
@@ -24,12 +23,17 @@ func fetch_new_levels(_new_level_number):
 		query_string)
 	
 
+func update_doors():
+	tileMap.redDoor.level_name = doorMapping[tileMap.redDoor.name]["name"]
+	tileMap.greenDoor.level_name = doorMapping[tileMap.greenDoor.name]["name"]
+	tileMap.blueDoor.level_name = doorMapping[tileMap.blueDoor.name]["name"]
+	
 func _on_request_completed(result, response_code, headers, body):
 	var body_content = body.get_string_from_utf8()
-	print(body_content)
 	var json = JSON.parse(body_content)
 	doorMapping = json.result
-	httpActive = false
+	update_doors()
+
 
 func _physics_process(_delta):
 	var camera_pos = camera.get_position()

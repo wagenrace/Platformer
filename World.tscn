@@ -1,13 +1,15 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tileset.png" type="Texture" id=2]
+[ext_resource path="res://art/Minimal5x7.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://World.gd" type="Script" id=4]
 [ext_resource path="res://Door.tscn" type="PackedScene" id=5]
 [ext_resource path="res://art/door_blue.png" type="Texture" id=6]
 [ext_resource path="res://art/door_green.png" type="Texture" id=7]
 [ext_resource path="res://LevelLayout.gd" type="Script" id=8]
 [ext_resource path="res://art/door_red.png" type="Texture" id=9]
+[ext_resource path="res://art/background_city.png" type="Texture" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -459,6 +461,9 @@ resource_local_to_scene = true
 } ]
 0/z_index = 0
 
+[sub_resource type="DynamicFont" id=50]
+font_data = ExtResource( 3 )
+
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
 
@@ -474,14 +479,17 @@ script = ExtResource( 8 )
 [node name="DoorRed" parent="TileMap" instance=ExtResource( 5 )]
 position = Vector2( -17, 176 )
 spriteDoor = ExtResource( 9 )
+level_name = "Red"
 
 [node name="DoorBlue" parent="TileMap" instance=ExtResource( 5 )]
 position = Vector2( -47, -19 )
 spriteDoor = ExtResource( 6 )
+level_name = "Blue"
 
 [node name="DoorGreen" parent="TileMap" instance=ExtResource( 5 )]
 position = Vector2( 24, -21 )
 spriteDoor = ExtResource( 7 )
+level_name = "Green"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1, 1 )
@@ -491,3 +499,21 @@ position = Vector2( 161, 90 )
 current = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+light_mask = 0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -149.0
+margin_right = 149.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 50 )
+text = "Intro lot of other text that is also here for no good reason "
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground"]
+position = Vector2( 161, 89 )
+texture = ExtResource( 10 )
