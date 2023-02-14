@@ -11,9 +11,6 @@ func assing_sprite(tex):
 
 func assing_door_label(tex: String):
 	get_node("Label").text = tex
-	
-func _ready():
-	pass
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
