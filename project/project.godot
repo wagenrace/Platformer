@@ -31,6 +31,7 @@ common/drop_mouse_on_gui_input_disabled=true
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Door"
+2d_physics/layer_3="Die"
 
 [physics]
 
