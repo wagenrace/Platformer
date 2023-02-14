@@ -61,7 +61,10 @@ func reset_position():
 	else:
 		position = Vector2.ZERO
 
+func die():
+	is_alive = false
+	animationPlayer.play("Explosion")
+
 func _input(ev):
 	if ev is InputEventKey and ev.scancode == KEY_R:
-		is_alive = false
-		animationPlayer.play("Explosion")
+		die()
