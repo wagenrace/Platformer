@@ -484,17 +484,14 @@ script = ExtResource( 8 )
 [node name="DoorRed" parent="TileMap" instance=ExtResource( 5 )]
 position = Vector2( -17, 176 )
 spriteDoor = ExtResource( 9 )
-level_name = "Red"
 
 [node name="DoorBlue" parent="TileMap" instance=ExtResource( 5 )]
 position = Vector2( -47, -19 )
 spriteDoor = ExtResource( 6 )
-level_name = "Blue"
 
 [node name="DoorGreen" parent="TileMap" instance=ExtResource( 5 )]
 position = Vector2( 24, -21 )
 spriteDoor = ExtResource( 7 )
-level_name = "Green"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1, 1 )
