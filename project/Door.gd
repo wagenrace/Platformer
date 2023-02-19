@@ -10,7 +10,12 @@ func assing_sprite(tex):
 	get_node("Sprite").texture = tex
 
 func assing_door_label(tex: String):
-	get_node("Label").text = tex
+	print(tex)
+	if not tex:
+		get_node("Sprite").visible = false
+	else:
+		get_node("Sprite").visible = true
+		get_node("Label").text = tex
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
