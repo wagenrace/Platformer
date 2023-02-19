@@ -73,8 +73,8 @@ onready var redDoor = $"DoorRed"
 onready var blueDoor = $"DoorBlue"
 onready var greenDoor = $"DoorGreen"
 var door_island_size: int = 2
+var current_tilemap_num = 1
 
-	
 func add_door(_door, current_position):
 	var door_position = current_position
 	door_position.x += 1
@@ -82,7 +82,7 @@ func add_door(_door, current_position):
 
 	for _i in range(door_island_size):
 		current_position.x += 1
-		tileMap.set_cellv(current_position, 0)
+		tileMap.set_cellv(current_position, current_tilemap_num)
 	
 	_door.position = door_position
 	
@@ -118,5 +118,5 @@ func apply_level(level):
 
 		for _i in range(_island_width):
 			current_position.x += 1
-			tileMap.set_cellv(current_position, 0)
+			tileMap.set_cellv(current_position, current_tilemap_num)
 	tileMap.update_bitmask_region (Vector2(-2,0), Vector2(current_position.x, 11))
